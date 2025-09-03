@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 public class Address {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String city;
     String street;

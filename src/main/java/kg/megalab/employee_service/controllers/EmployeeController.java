@@ -30,7 +30,7 @@ public class EmployeeController {
         try {
             Long employeeId = employeeService.appendEmployee(employeeCreateDto);
             Map<String, Long> map = new HashMap<>();
-            map.put("emlployee_id", employeeId);
+            map.put("employee_id", employeeId);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(map);
 

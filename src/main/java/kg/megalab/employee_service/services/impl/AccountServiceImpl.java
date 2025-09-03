@@ -1,5 +1,6 @@
 package kg.megalab.employee_service.services.impl;
 
+import jakarta.transaction.Transactional;
 import kg.megalab.employee_service.mappers.AccountMapper;
 import kg.megalab.employee_service.models.Account;
 import kg.megalab.employee_service.models.dto.AccountDto;

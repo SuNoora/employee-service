@@ -1,5 +1,6 @@
 package kg.megalab.employee_service.services.impl;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import kg.megalab.employee_service.mappers.AccountMapper;
 import kg.megalab.employee_service.mappers.EmployeeMapper;
@@ -32,15 +33,24 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
+    @Transactional
     @Override
     public Long appendEmployee(EmployeeCreateDto employeeCreateDto) {
 
-        Account account1 = AccountMapper.INSTANCE.accountDtoToAccount(employeeCreateDto.getAccount());
+        Account account = AccountMapper.INSTANCE.accountDtoToAccount(employeeCreateDto.getAccount());
 
-        Employee employee = employeeMapper.employeeCreateDtoToEmployee(employeeCreateDto, account1);
+        Employee employee = employeeMapper.employeeCreateDtoToEmployee(employeeCreateDto, account);
         employee = employeeRepo.save(employee);
 
+        addressService.save(employeeCreateDto.getAddress(), employee);
+
+        contactService.saveContacts(employeeCreateDto.getContacts(), employee);
+
+
+
         return employee.getId();
+
+
     }
 
 }
